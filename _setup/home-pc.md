@@ -38,7 +38,12 @@ In the Linux terminal:
 provide shell access.
     - If you receive a "permission denied" message, see ["Error: Permission denied (publickey)"](https://help.github.com/articles/error-permission-denied-publickey).
 
-You can now git clone over SSH and modify it without logging in:
+1. git clone over SSH:
 
-`$ git clone git@github.com:ericlingit/fastai-notes.git`
+    `$ git clone git@github.com:ericlingit/fastai-notes.git`
 
+1. set the remote repo url
+
+    `git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
+
+You can now git push to your github account.
