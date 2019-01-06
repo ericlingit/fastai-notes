@@ -2,15 +2,15 @@
 Windows 10
 
 # Git
-I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10). I'll use that instead of installing Git again on Windows.
+I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with git installed. I'll use that instead of installing Git again on Windows.
 
 To access your Windows files from inside the Linux subsystem, go to `/mnt/`, you'll see the drive letters for `c` or `d`.
 
 For example, my github notes are located at `C:/Users/user/Desktop`. I can access from Linux subsystem via `/mnt/c/Users/user/Desktop`.
 
-To make things easier, create a symbolic:
+To make things easier, create a symbolic link to it:
 
-`ln -s /mnt/c/Users/user/Desktop ~/Desktop`
+`$ ln -s /mnt/c/Users/user/Desktop ~/Desktop`
 
 # Connect to Github over SSH
 
@@ -46,4 +46,36 @@ provide shell access.
 
     `git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
 
-You can now git push to your github account.
+You can now `git push` to your github account.
+
+# Connect to Paperspace Jupyter server over SSH
+
+1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
+1. On Paperspace website console:
+    - Start your VM
+1. On local machine:
+    - Download & run putty.exe
+    - In "Session":
+        - Host name: 184.105.175.191
+        - Port: 22
+    - In "SSH" -> "Tunnels"
+        - Source port: `8889`
+        - Destination: `localhost:8889`
+        - Click Add
+    - In "Connection":
+        - Seconds between keepalives: `60` (this prevents the client from automatically disconnecting by sending a keepalive message every 60 seconds)
+    - Go back to "Session":
+        - Saved session: `paperspace`
+        - Click Save
+    - Click Open, and accept the key when prompted.
+    - login as: `paperspace`
+    - password: Copy the password sent to your inbox by Paperspace. To paste into putty, right click inside the terminal (you won't see any characters show up), then press Enter.
+1. Once logged in:
+    - `$ jupyter notebook --no-browser`
+    - You'll be shown a localhost url to copy and paste into the browser, like this:
+    > `http://localhost:8889/?token=a92b521a5e2fe37037d8265be76caed123232a7802b8825e`
+    - Copy (hightlight with mouse cursor, then press ctrl+shift+c) and paste it into your browser, and hit Enter. You're now connected to the remote VM's Jupyter notebook.
+
+Why go through all of this trouble when you can simply launch Jupyter notebook in Paperspace console and connect via the remote IP? Because it's not encrypted.
+
+Ideally you'd want to login with a SSH key. I'll add instructions for doing that later (maybe).
