@@ -47,7 +47,7 @@ On local machine:
     - restart ssh service: `$ sudo service ssh reload`
 
 # Connect to Paperspace Jupyter server over SSH
-Add ssh port forward to `~/.ssh/config`:
+[Add ssh port forward to config file](https://stackoverflow.com/a/9146502/9762732):
 1. edit this file:
 2. In the section `Host paperspace`, append this line:
     `  LocalForward 8889 localhost:8889`
