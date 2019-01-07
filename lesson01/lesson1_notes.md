@@ -22,13 +22,13 @@ See the error console for details.
   IPython 6.2.1 -- An enhanced Interactive Python. Type '?' for help.
   ```
 
-### [Fix the error](https://github.com/fastai/course-v3/issues/64#issuecomment-434501646):
+### Fix the error:
 1. Revert the lesson notebook (because the error will crop out half of the notebook and autosave):
     ```
     $ cd fastai
     $ git checkout -- courses/dl1/lesson1.ipynb
     ```
-1. Update `notebook`, this should update to version >= 5.7.4
+1. [Update](https://github.com/fastai/course-v3/issues/64#issuecomment-434501646) `notebook`, this should update to version >= 5.7.4
     ```
     $ conda update notebook
     Fetching package metadata ...........
