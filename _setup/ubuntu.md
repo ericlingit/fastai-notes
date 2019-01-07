@@ -29,7 +29,7 @@ On local machine:
     - Paste the public key located at ~/.ssh/paperspace_ssh.pub
     - Save & close
 
-1. # Test your setup by logging in with:
+1. Test your setup by logging in with:
     - $ ssh paperspace
 
 1. [Disable password access](https://askubuntu.com/a/1992/884977:) through SSH on the remote machine:
