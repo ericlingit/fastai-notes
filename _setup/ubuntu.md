@@ -36,7 +36,7 @@ On local machine:
 1. [Disable password access](https://askubuntu.com/a/1992/884977:) through SSH on the remote machine:
     - WARNING: make sure you're able to login with your ssh private key, else you won't be able to connect!
     - edit /etc/ssh/sshd_config
-    - find this line: `PasswordAuthentication yes`
+    - find this line: `#PasswordAuthentication yes`
     - change it to: `PasswordAuthentication no`
     - to ensure that Paperspace's web console doesn't break after the above change, append the following 2 lines to the end of the file to [allow password authentication for local network connections while enforcing ssh keys for WAN](https://serverfault.com/q/406839):
         ```
