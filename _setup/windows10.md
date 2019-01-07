@@ -14,14 +14,14 @@ To make things easier, create a symbolic link to it:
 
 # Connect to Github over SSH
 
-In the Linux terminal:
+In the Linux subsystem terminal:
 
-1. Generate a SSH key:
+1. Generate a SSH key-pair:
     - `$ ssh-keygen -t rsa -b 4096 -C "my_github_email@gmail.com"`
 1. Give it a file name:
     - `github_ssh`
     - This will create 2 files in the Home folder of the Linux subsystem: `github_ssh`, and `github_ssh.pub` (a private and a public key)
-1. Add the new key to `ssh-agent`:
+1. Add the new private key to `ssh-agent`:
     - `$ eval $(ssh-agent -s)`
     - `$ ssh-add github_ssh`
 1. Copy the public key to Windows 10:
