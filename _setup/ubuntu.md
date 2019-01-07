@@ -38,6 +38,10 @@ On local machine:
     - edit /etc/ssh/sshd_config
     - find this line: `PasswordAuthentication yes`
     - change it to: `PasswordAuthentication no`
+    - to ensure that Paperspace's web console doesn't break after the above change, append the following 2 lines to the end of the file to [allow password authentication for local network connections while enforcing ssh keys for WAN](https://serverfault.com/q/406839):
+        ```
+        Match Address 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+            PasswordAuthentication yes
+        ```
     - save
     - restart ssh service: `$ sudo service ssh reload`
-    - If you accidently locked yourself out of Paperspace VM, you can go to its web console and undo the change there.
