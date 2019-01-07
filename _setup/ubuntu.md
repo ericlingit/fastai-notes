@@ -31,6 +31,7 @@ On local machine:
 
 1. Test your setup by logging in with:
     - $ ssh paperspace
+    - You should _not_ be prompted to enter a ssh password
 
 1. [Disable password access](https://askubuntu.com/a/1992/884977:) through SSH on the remote machine:
     - WARNING: make sure you're able to login with your ssh private key, else you won't be able to connect!
