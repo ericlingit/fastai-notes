@@ -23,57 +23,51 @@ See the error console for details.
   ```
 
 ### [Fix the error](https://github.com/fastai/course-v3/issues/64#issuecomment-434501646):
-1. Rever the file (because the error will crop out half of the notebook and autosave):
+1. Revert the lesson notebook (because the error will crop out half of the notebook and autosave):
     ```
     $ cd fastai
     $ git checkout -- courses/dl1/lesson1.ipynb
     ```
-2. Update `notebook`, this should update to version >= 5.7.4
+1. Update `notebook`, this should update to version >= 5.7.4
     ```
     $ conda update notebook
+    Fetching package metadata ...........
+    Solving package specifications: .
+
+    Package plan for installation in environment /home/paperspace/anaconda3/envs/fastai:
+
+    The following NEW packages will be INSTALLED:
+
+        prometheus_client: 0.5.0-py36_0         
+        send2trash:        1.5.0-py36_0         
+
+    The following packages will be UPDATED:
+
+        jupyter_client:    5.1.0-py36h614e9ea_0  --> 5.2.4-py36_0         
+        notebook:          5.2.2-py36h40a37e6_0  --> 5.7.4-py36_0         
+        pyzmq:             16.0.3-py36he2533c7_0 --> 17.0.0-py36h14c3975_0
+        terminado:         0.6-py36ha25a19f_0    --> 0.8.1-py36_1         
+        zeromq:            4.2.2-hbedb6e5_2      --> 4.2.3-h439df22_3     
+
+    Proceed ([y]/n)? y
+
+    zeromq-4.2.3-h 100% |################################| Time: 0:00:00  44.95 MB/s
+    prometheus_cli 100% |################################| Time: 0:00:00  55.14 MB/s
+    pyzmq-17.0.0-p 100% |################################| Time: 0:00:00  60.83 MB/s
+    send2trash-1.5 100% |################################| Time: 0:00:00  41.49 MB/s
+    terminado-0.8. 100% |################################| Time: 0:00:00  37.73 MB/s
+    jupyter_client 100% |################################| Time: 0:00:00  68.73 MB/s
+    notebook-5.7.4 100% |################################| Time: 0:00:00  66.95 MB/s
     ```
+1. Important: update jupyter notebook config:
+    ```
+    $ jupyter notebook --generate-config ~/.jupyter/jupyter_notebook_config.py "c.NotebookApp.ip = '127.0.0.1'"
+    ```
+  - When prompted to overwrite, press y and enter.
 
-Annnnd now i can't launch jupyter notebook :(
-
+If you skip the last step, you'll get [the following error](https://forums.fast.ai/t/jupyter-notebook-keyerror-allow-remote-access/24392/9) when launching jupyter notebook:
 ```
-(fastai) paperspace@paperspace:~/fastai$ conda update notebook
-Fetching package metadata ...........
-Solving package specifications: .
-
-Package plan for installation in environment /home/paperspace/anaconda3/envs/fastai:
-
-The following NEW packages will be INSTALLED:
-
-    prometheus_client: 0.5.0-py36_0         
-    send2trash:        1.5.0-py36_0         
-
-The following packages will be UPDATED:
-
-    jupyter_client:    5.1.0-py36h614e9ea_0  --> 5.2.4-py36_0         
-    notebook:          5.2.2-py36h40a37e6_0  --> 5.7.4-py36_0         
-    pyzmq:             16.0.3-py36he2533c7_0 --> 17.0.0-py36h14c3975_0
-    terminado:         0.6-py36ha25a19f_0    --> 0.8.1-py36_1         
-    zeromq:            4.2.2-hbedb6e5_2      --> 4.2.3-h439df22_3     
-
-Proceed ([y]/n)? y
-
-zeromq-4.2.3-h 100% |################################| Time: 0:00:00  44.95 MB/s
-prometheus_cli 100% |################################| Time: 0:00:00  55.14 MB/s
-pyzmq-17.0.0-p 100% |################################| Time: 0:00:00  60.83 MB/s
-send2trash-1.5 100% |################################| Time: 0:00:00  41.49 MB/s
-terminado-0.8. 100% |################################| Time: 0:00:00  37.73 MB/s
-jupyter_client 100% |################################| Time: 0:00:00  68.73 MB/s
-notebook-5.7.4 100% |################################| Time: 0:00:00  66.95 MB/s
-
-
-(fastai) paperspace@paperspace:~/fastai$ git checkout -- courses/dl1/lesson1.ipynb
-(fastai) paperspace@paperspace:~/fastai$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-nothing to commit, working directory clean
-
-
-(fastai) paperspace@paperspace:~/fastai$jupyter notebook --no-browser
+$ jupyter notebook --no-browser
 Traceback (most recent call last):
   File "/home/paperspace/anaconda3/envs/fastai/lib/python3.6/site-packages/traitlets/traitlets.py", line 528, in get
     value = obj._trait_values[self.name]
@@ -118,8 +112,6 @@ Traceback (most recent call last):
     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
 socket.gaierror: [Errno -2] Name or service not known
 ```
-
-still trouble shooting...
 
 ---
 
