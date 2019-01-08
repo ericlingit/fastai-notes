@@ -48,6 +48,16 @@ provide shell access.
 
 You can now `git push` to your github account.
 
+# [Sign your commits](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
+
+1. Generate a gpg key pair
+1. Copy the public key and paste in your Github account's settings page.
+1. List your keys with `$ gpg --list-keys`
+1. Copy the key ID that looks like this: `23283E8E879E0707D3D03BE86F3A9EE04AE75559`
+1. `cd` to your working directory
+1. `$ git config user.signingkey 23283E8E879E0707D3D03BE86F3A9EE04AE75559`
+1. commit with `-S` option: `git commit -S -m "commit msg here"`
+
 # Connect to Paperspace Jupyter server over SSH
 
 1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
