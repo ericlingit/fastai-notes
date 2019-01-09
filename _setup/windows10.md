@@ -66,7 +66,7 @@ Host github.com
 1. Copy the key ID that looks like this: `6F3A9EE04AE75559`
 1. `cd` to your working directory
 1. `$ git config user.signingkey 6F3A9EE04AE75559`
-1. commit with `-S` option: `git commit -S -m "commit msg here"`
+1. commit with `-S` option: `$ git commit -S -m "commit msg here"`
 
 To sign commits without having to specify the `-S` option, you can set this:
 
