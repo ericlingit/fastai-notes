@@ -17,6 +17,7 @@ To make things easier, create a symbolic link to it:
 In the Linux subsystem terminal:
 
 1. Generate a SSH key-pair:
+    - `$ cd ~/.ssh`
     - `$ ssh-keygen -t rsa -b 4096 -C "my_github_email@gmail.com"`
 1. Give it a file name:
     - `github_ssh`
@@ -25,7 +26,7 @@ In the Linux subsystem terminal:
     - `$ eval $(ssh-agent -s)`
     - `$ ssh-add github_ssh`
 1. Copy the public key to Windows 10:
-    - `$ cp github_ssh.pub Desktop`
+    - `$ cp github_ssh.pub ~/Desktop`
 
 1. Switch over to Windows 10 and locate the file `github_ssh.pub` in your Desktop folder.
 1. Open it with a text editor and copy its content
@@ -47,6 +48,15 @@ provide shell access.
     `git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
 
 You can now `git push` to your github account.
+
+If you have more than 1 SSH key in your `.ssh` folder, you need to edit your `~./ssh/config` file with the following entry. Otherwise git won't know which key it should use to log into github:
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_ssh
+  IdentitiesOnly yes
+```
 
 # [Sign your commits](https://docs.gitlab.com/ee/user/project/repository/gpg_signed_commits/)
 
