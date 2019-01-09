@@ -49,7 +49,7 @@ provide shell access.
 
 You can now `git push` to your github account.
 
-If you have more than 1 SSH key in your `.ssh` folder, you need to edit your `~./ssh/config` file with the following entry. Otherwise git won't know which key it should use to log into github:
+If you have [more than 1 SSH key](https://stackoverflow.com/q/7927750/9762732) in your `.ssh` folder, you need to edit your `~./ssh/config` file with the following entry. Otherwise git won't know which key it should use to log into github:
 ```
 Host github.com
   HostName github.com
