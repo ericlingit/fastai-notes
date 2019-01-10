@@ -115,7 +115,7 @@ Your commits will now be automatically signed.
 # Connect to Paperspace Jupyter server over SSH
 
 1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
-1. Follow the steps outlined [here](https://github.com/ericlingit/fastai-notes/blob/master/_setup/ubuntu.md#connect-to-paperspace-over-ssh)
+1. Follow the steps outlined [here](https://github.com/ericlingit/fastai-notes/blob/master/_setup/ubuntu.md#connect-to-paperspace-over-ssh) to connect to paperspace over ssh.
 1. On Paperspace website console:
     - Start your VM
 1. On local machine:
