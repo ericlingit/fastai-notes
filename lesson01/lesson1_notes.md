@@ -1,3 +1,7 @@
+## Why not run on Google Colab?
+If you get disconnected after idling for a while, [you lose the session](https://forums.fast.ai/t/google-colab-setup-for-fastai-part-2-v2/13464/3). You have to reinstall all of the dependencies _again_. Yes, the setup can be automated with a script. I'm sure someone wrote it and shared it on github, but running the script and redownloading everything takes a lot of time. It's too much of a hassle. I'd rather focus on learning the lesson. If you're just taking lesson 1 out for a test-drive, Colab is fine. Going through the whole course on Colab? Nope.
+
+---
 ## [Problem](https://i.imgur.com/OwmikTw.png) encountered on launching lesson1.ipynb:
 ```
 Notebook failed to load
