@@ -53,17 +53,41 @@ Host github.com
 
 # [Sign your commits](https://docs.gitlab.com/ee/user/project/repository/gpg_signed_commits/)
 
-1. Generate a gpg key pair
-1. Copy the public key and paste in your Github account's settings page.
-1. List your keys with `$ gpg --list-secret-keys --keyid-format LONG`
-1. Copy the key ID that looks like this: `8E88FC612D3C6489`
-1. `cd` to your working directory
-1. `$ git config user.signingkey 8E88FC612D3C6489`
-1. commit with `-S` option: `$ git commit -S -m "commit msg here"`
+1. Generate a GPG key pair
+    - `$ gpg --full-generate-key`
+    - Select "RSA and RSA" for your key type
+    - 4096 for key size
+    - The "Real name" should match your github account name. For me, it's `ericlingit`
+    - The "Email address" should _not_ match your Github email! Github has enabled email privacy by default. This [prevents git pushes that can expose your email](https://stackoverflow.com/a/51097104/9762732) to the world. Instead, you should [use a private, noreply address from github](https://help.github.com/articles/setting-your-commit-email-address-on-github/). My address looks like this: 
+    
+        `ericlingit@users.noreply.github.com`
+    
+    - When finished, you should get an output that contains this portion:
 
-To sign commits without having to specify the `-S` option, you can set this:
+    ```
+    gpg: key DB3DA594230C0E46 marked as ultimately trusted
+    gpg: revocation certificate stored as '/home/eric/.gnupg/openpgp-revocs.d/6475F2FF9432A8621B79F499DB3DA594230C0E46.rev'
+    public and secret key created and signed.
 
-`$ git config commit.gpgsign true`
+    pub   rsa4096 2019-01-10 [SC]
+        6475F2FF9432A8621B79F499DB3DA594230C0E46
+    uid                      ericlingit <ericlingit@users.noreply.github.com>
+    sub   rsa4096 2019-01-10 [E]
+    ```
+    - Explanation: `DB3DA594230C0E46` is your key ID, and `6475F2FF9432A8621B79F499DB3DA594230C0E46` is the fingerprint of your key (note that the key ID is the last 16 digits of the fingerpint). The revocation certificate should be published to a key server if you lose your secret key.
+    - You can list your keys with:
+
+        `$ gpg --list-secret-keys --keyid-format LONG`
+1. Export the public key: `$ gpg -a --export 8E88FC612D3C6489 > ~/Desktop/github_gpg_public.asc`
+1. Open `github_gpg_public.asc` with a text editor and copy its content, and then [paste in your Github account's settings page](https://help.github.com/articles/adding-a-new-gpg-key-to-your-github-account/).
+1. Back in the linux terminal, `cd` to your working directory and enter the following commands:
+    ```
+    $ git config user.name ericlingit
+    $ git config user.email ericlingit@users.noreply.github.com
+    $ git config user.signingkey 8E88FC612D3C6489
+    $ git config commit.gpgsign true
+    ```
+Your commits will now be automatically signed.
 
 # Connect to Paperspace Jupyter server over SSH
 
@@ -74,11 +98,11 @@ To sign commits without having to specify the `-S` option, you can set this:
 1. On local machine:
     - Download & run putty.exe
     - In "Session":
-        - Host name: 184.105.175.191
+        - Host name: `1xx.xxx.xxx.xxx` (this is your paperspace VM IP)
         - Port: 22
     - In "SSH" -> "Tunnels"
-        - Source port: `8889`
-        - Destination: `localhost:8889`
+        - Source port: `8888`
+        - Destination: `localhost:8888`
         - Click Add
     - In "Connection":
         - Seconds between keepalives: `60` (this prevents the client from automatically disconnecting by sending a keepalive message every 60 seconds)
@@ -89,9 +113,9 @@ To sign commits without having to specify the `-S` option, you can set this:
     - login as: `paperspace`
     - password: Copy the password sent to your inbox by Paperspace. To paste into putty, right click inside the terminal (you won't see any characters show up), then press Enter.
 1. Once logged in:
-    - `$ jupyter notebook --no-browser`
+    - `$ jupyter notebook --no-browser --port 8888`
     - You'll be shown a localhost url to copy and paste into the browser, like this:
-    > `http://localhost:8889/?token=a92b521a5e2fe37037d8265be76caed123232a7802b8825e`
+    > `http://localhost:8888/?token=a92b521a5e2fe37037d8265be76caed123232a7802b8825e`
     - Copy (hightlight with mouse cursor, then press ctrl+shift+c) and paste it into your browser, and hit Enter. You're now connected to the remote VM's Jupyter notebook.
 
 Why go through all of this trouble when you can simply launch Jupyter notebook in Paperspace console and connect via the remote IP? Because it's not encrypted.
