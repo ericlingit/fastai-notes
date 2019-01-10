@@ -13,21 +13,23 @@
 See https://github.com/ericlingit/fastai-notes/tree/master/_setup
 
 ## Get comfortable with tools
-[kaggle learn](https://www.kaggle.com/learn/overview)
+- [kaggle learn](https://www.kaggle.com/learn/overview): covers python, jupyter, and pandas.
+- numpy: [tutorial](https://github.com/jamesdietle/fastaipart1v2/blob/master/Tutorials/NumpyTutorial.ipynb)
 
 ## Re-train resnet with my own images
-### Classify pictures of airliners and fighter jets
-#### data folder structure: `/home/downloads/jets`
-- train
-    - airliners: 51 jpg images of airliners produced by boeing, bombardier, and embraer.
-    - fighter-jets: 51 jpg images of western fighter jets such as the f-18, f-35.
-- test
-    - airliners: 39 jpg images of airliners produced by airbus, such as the a380, a320.
-    - fighter-jets: 39 jpn images of russian fighter jets produced by sukhoi and mikoyan, such as the su-35, mig-29.
-- valid
-    - airliners: 20 jpg images of airliners produced by tupolev, such as the tu-154.
-    - fighter-jets: 20 jpg images of korean and taiwanese fighter jets, such as the kai t-50 and aidc ching-kuo.
- 
+### Classify [pictures of airliners and fighter jets](https://www.dropbox.com/s/o8ek1idxpqm5vd1/jets.zip?dl=0) (61.7 MB)
+#### data folder structure:
+- jets
+    - train
+        - airliners: 51 jpg images of airliners produced by boeing, bombardier, and embraer.
+        - fighter-jets: 51 jpg images of western fighter jets such as the f-18, f-35.
+    - test
+        - airliners: 39 jpg images of airliners produced by airbus, such as the a380, a320.
+        - fighter-jets: 39 jpn images of russian fighter jets produced by sukhoi and mikoyan, such as the su-35, mig-29.
+    - valid
+        - airliners: 20 jpg images of airliners produced by tupolev, such as the tu-154.
+        - fighter-jets: 20 jpg images of korean and taiwanese fighter jets, such as the kai t-50 and aidc ching-kuo.
+
 #### data source
 Use [google_image_download](https://github.com/hardikvasa/google-images-download) to search and automatically download what you want
 
@@ -56,3 +58,11 @@ The `-r` option is recursive. It'll send everything in that directory one-by-one
 $ zip ~/downloads/jets
 $ scp ~/downloads/jets.zip paperspace@paperspace:~/
 ```
+
+
+
+---
+## Try different learning rates, epochs while running code
+> If you use a smaller batch size, you may want to decrease the learning rate by the same ratio. - [Jeremy](https://forums.fast.ai/t/wiki-lesson-1/9398/5?u=ericlin)
+
+## Feel free to explore week2 notebook
