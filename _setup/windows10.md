@@ -89,6 +89,29 @@ Host github.com
     ```
 Your commits will now be automatically signed.
 
+### Check that your commits are properly signed
+1. Modify your work, make a commit, and `git push` to Github.
+1. Show the last commit with `git log -1`:
+    ```
+    $ git log -1
+
+    commit be11721fa3475e13ef111b6e65807e05611c7932 (HEAD -> master)
+    Author: ericlingit <ericlingit@users.noreply.github.com>
+    Date:   Thu Jan 10 00:00:00 2019
+
+    Expanded generate gpg key section
+    ```
+2. Copy the commit hash. It looks like this: `be11721fa3475e13ef111b6e65807e05611c7932`
+3. Verify the commit with `git verify-commit <hash>`:
+    ```
+    $ git verify-commit be11721fa3475e13ef111b6e65807e05611c7932
+
+    gpg: Signature made Thu 10 Jan 2019 00:00:00 AM
+    gpg:                using RSA key 6475F2FF9432A8621B79F499DB3DA594230C0E46
+    gpg: Good signature from "ericlingit <ericlingit@users.noreply.github.com>" [ultimate]
+    ```
+4. Go to your [Github.com file history page](https://github.com/ericlingit/fastai-notes/commits/master/_setup). You should see a green "Verified" text for that commit record. You can also see the ones that I've screwed up :p
+
 # Connect to Paperspace Jupyter server over SSH
 
 1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
