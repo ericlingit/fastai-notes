@@ -18,7 +18,10 @@ In the Linux subsystem terminal:
 
 1. Generate a SSH key-pair:
     - `$ cd ~/.ssh`
-    - `$ ssh-keygen -t rsa -b 4096 -C "my_github_email@gmail.com"`
+    - `$ ssh-keygen -t ed25519 -a 100 -C "my_github_email@gmail.com"`
+        - `-t`: specifies type of key. [Why ed25519?](https://security.stackexchange.com/q/143442)
+        - `-a`: rounds of key derivations (makes your key's password harder to brute-force)
+        - `C`: comment
 1. Give it a file name:
     - `github_ssh`
     - This will create 2 files in the Home folder of the Linux subsystem: `github_ssh`, and `github_ssh.pub` (a private and a public key)
@@ -27,25 +30,15 @@ In the Linux subsystem terminal:
     - `$ ssh-add github_ssh`
 1. Copy the public key to Windows 10:
     - `$ cp github_ssh.pub ~/Desktop`
-
-1. Switch over to Windows 10 and locate the file `github_ssh.pub` in your Desktop folder.
-1. Open it with a text editor and copy its content
-1. Open a browser, go to github.com, and sign into your account.
-1. [Add the SSH public key to your account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 1. Test your connection (in Linux terminal):
     - `$ ssh -T git@github.com`
     - You should see this message:
-    >Hi ericlingit! You've successfully authenticated, but GitHub does not
-provide shell access.
+    > Hi ericlingit! You've successfully authenticated, but GitHub does not provide shell access.
     - If you receive a "permission denied" message, see ["Error: Permission denied (publickey)"](https://help.github.com/articles/error-permission-denied-publickey).
+1. set the remote repository url
 
-1. git clone over SSH:
-
-    `$ git clone git@github.com:ericlingit/fastai-notes.git`
-
-1. set the remote repo url
-
-    `git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
+    `$ git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
 
 You can now `git push` to your github account.
 
@@ -63,9 +56,9 @@ Host github.com
 1. Generate a gpg key pair
 1. Copy the public key and paste in your Github account's settings page.
 1. List your keys with `$ gpg --list-secret-keys --keyid-format LONG`
-1. Copy the key ID that looks like this: `6F3A9EE04AE75559`
+1. Copy the key ID that looks like this: `8E88FC612D3C6489`
 1. `cd` to your working directory
-1. `$ git config user.signingkey 6F3A9EE04AE75559`
+1. `$ git config user.signingkey 8E88FC612D3C6489`
 1. commit with `-S` option: `$ git commit -S -m "commit msg here"`
 
 To sign commits without having to specify the `-S` option, you can set this:
@@ -75,6 +68,7 @@ To sign commits without having to specify the `-S` option, you can set this:
 # Connect to Paperspace Jupyter server over SSH
 
 1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
+1. Follow the steps outlined [here](https://github.com/ericlingit/fastai-notes/blob/master/_setup/ubuntu.md#connect-to-paperspace-over-ssh)
 1. On Paperspace website console:
     - Start your VM
 1. On local machine:
@@ -101,5 +95,3 @@ To sign commits without having to specify the `-S` option, you can set this:
     - Copy (hightlight with mouse cursor, then press ctrl+shift+c) and paste it into your browser, and hit Enter. You're now connected to the remote VM's Jupyter notebook.
 
 Why go through all of this trouble when you can simply launch Jupyter notebook in Paperspace console and connect via the remote IP? Because it's not encrypted.
-
-Ideally you'd want to login with a SSH key. I'll add instructions for doing that later (maybe).
