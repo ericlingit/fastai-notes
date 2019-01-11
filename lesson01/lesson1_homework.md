@@ -108,7 +108,10 @@ For fighter jets, the most-correct ones all have a view slightly above or below 
 
 Most images taken of airliners are views from the side. There is a clear lack of front or rear-view photos for airliners, and a lack of (horizontal) side view for fighter jets in my data.
 
+Also consider this: [how do you know the classifier is really looking at the aircraft](https://towardsdatascience.com/how-to-spot-data-leakage-thanks-to-heat-maps-81a25f5331eb), and not using clues from the background? Thanks to fastai forum user [oneironaut](https://forums.fast.ai/t/lesson-1-homework-airliners-vs-fighter-jets/34571/4?u=ericlin).
+
 ---
+
 ## Try different learning rates, epochs while running code
 > "If you use a smaller batch size, you may want to decrease the learning rate by the same ratio." - [Jeremy](https://forums.fast.ai/t/wiki-lesson-1/9398/5)
 
