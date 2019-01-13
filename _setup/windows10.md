@@ -2,13 +2,13 @@
 Windows 10
 
 # Git
-I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with git installed. I'll use that instead of installing Git again on Windows.
+I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10), and it comes preinstalled with git, gpg, and ssh. So I'll use that instead of installing all that on Windows.
 
 To access your Windows files from inside the Linux subsystem, go to `/mnt/`, you'll see the drive letters for `c` or `d`.
 
 For example, my github notes are located at `C:/Users/user/Desktop`. I can access from Linux subsystem via `/mnt/c/Users/user/Desktop`.
 
-To make things easier, create a symbolic link to it:
+To make your Windows files more accessible in Linux, create a symbolic link:
 
 `$ ln -s /mnt/c/Users/user/Desktop ~/Desktop`
 
@@ -24,8 +24,8 @@ In the Linux subsystem terminal:
         - `C`: comment
 1. Give it a file name:
     - `github_ssh`
-    - This will create 2 files in the Home folder of the Linux subsystem: `github_ssh`, and `github_ssh.pub` (a private and a public key)
-1. Add the new private key to `ssh-agent`:
+    - This will create 2 files: `github_ssh`, and `github_ssh.pub` (a private and a public key)
+1. Add the private key to `ssh-agent`:
     - `$ eval $(ssh-agent -s)`
     - `$ ssh-add github_ssh`
 1. Copy the public key to Windows 10:
