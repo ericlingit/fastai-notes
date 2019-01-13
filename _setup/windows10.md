@@ -2,17 +2,17 @@
 Windows 10
 
 # Git
-I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10), and it comes preinstalled with git, gpg, and ssh. So I'll use that instead of installing all that on Windows.
+I had previously set up [Windows subsystem for Linux (Ubuntu)](https://docs.microsoft.com/en-us/windows/wsl/install-win10), and it comes preinstalled with git, gpg, and ssh.
 
-To access your Windows files from inside the Linux subsystem, go to `/mnt/`, you'll see the drive letters for `c` or `d`.
+To access Windows files from inside Linux subsystem, go to `/mnt/`.
 
 For example, my github notes are located at `C:/Users/user/Desktop`. I can access from Linux subsystem via `/mnt/c/Users/user/Desktop`.
 
-To make your Windows files more accessible in Linux, create a symbolic link:
+To make Windows files more accessible in Linux, create a symbolic link:
 
 `$ ln -s /mnt/c/Users/user/Desktop ~/Desktop`
 
-# Connect to Github over SSH
+# Connect to GitHub over SSH
 
 In the Linux subsystem terminal:
 
@@ -25,17 +25,52 @@ In the Linux subsystem terminal:
 1. Give it a file name:
     - `github_ssh`
     - This will create 2 files: `github_ssh`, and `github_ssh.pub` (a private and a public key)
+1. __If you already have a ssh secret key__:
+    - copy it to `~/.ssh`
+    - set its permission to owner exclusive:
+
+        ```$ chmod 600 github_ssh```
 1. Add the private key to `ssh-agent`:
     - `$ eval $(ssh-agent -s)`
     - `$ ssh-add github_ssh`
+1. [Auto-start ssh-agent](https://help.github.com/articles/working-with-ssh-key-passphrases/#auto-launching-ssh-agent-on-git-for-windows) on session start:
+    1. Edit this file: `~/.profile`
+    1. Paste the following content to the bottom:
+        ```bash
+        # auto start ssh-agent
+        env=~/.ssh/agent.env
+
+        agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+        agent_start () {
+            (umask 077; ssh-agent >| "$env")
+            . "$env" >| /dev/null ; }
+
+        agent_load_env
+
+        # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+        agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+        if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+            agent_start
+            ssh-add
+        elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+            ssh-add
+        fi
+
+        unset env
+        ```
+    1. Save & quit
 1. Copy the public key to Windows 10:
     - `$ cp github_ssh.pub ~/Desktop`
+    - If you don't have the public key, run this: `$ ssh-keygen -f ~/.ssh/github_ssh -y > ~/.ssh/github_ssh.pub`
 1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 1. Test your connection (in Linux terminal):
     - `$ ssh -T git@github.com`
     - You should see this message:
     > Hi ericlingit! You've successfully authenticated, but GitHub does not provide shell access.
     - If you receive a "permission denied" message, see ["Error: Permission denied (publickey)"](https://help.github.com/articles/error-permission-denied-publickey).
+1. `cd` to your working directory: `$ cd ~/Desktop/fastai-notes`
 1. set the remote repository url
 
     `$ git remote set-url origin git@github.com:ericlingit/fastai-notes.git`
@@ -78,13 +113,14 @@ Host github.com
     - You can list your keys with:
 
         `$ gpg --list-secret-keys --keyid-format LONG`
-1. Export the public key: `$ gpg -a --export 8E88FC612D3C6489 > ~/Desktop/github_gpg_public.asc`
-1. Open `github_gpg_public.asc` with a text editor and copy its content, and then [paste in your Github account's settings page](https://help.github.com/articles/adding-a-new-gpg-key-to-your-github-account/).
-1. Back in the linux terminal, `cd` to your working directory and enter the following commands:
+1. Export the public key: `$ gpg -a --export DB3DA594230C0E46 > ~/Desktop/github_gpg_public.asc`
+1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-gpg-key-to-your-github-account/).
+1. Back in the linux terminal, cd to your working directory: `$ cd ~/Desktop/fastai-notes`
+1. Enter the following commands:
     ```
     $ git config user.name ericlingit
     $ git config user.email ericlingit@users.noreply.github.com
-    $ git config user.signingkey 8E88FC612D3C6489
+    $ git config user.signingkey 6475F2FF9432A8621B79F499DB3DA594230C0E46
     $ git config commit.gpgsign true
     ```
 Your commits will now be automatically signed.
