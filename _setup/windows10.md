@@ -21,7 +21,7 @@ In the Linux subsystem terminal:
     - `$ ssh-keygen -t ed25519 -a 100 -C "my_github_email@gmail.com"`
         - `-t`: specifies type of key. [Why ed25519?](https://security.stackexchange.com/q/143442)
         - `-a`: rounds of key derivations (makes your key's password harder to brute-force)
-        - `C`: comment
+        - `-C`: comment
 1. Give it a file name:
     - `github_ssh`
     - This will create 2 files: `github_ssh`, and `github_ssh.pub` (a private and a public key)
@@ -63,7 +63,10 @@ In the Linux subsystem terminal:
     1. Save & quit
 1. Copy the public key to Windows 10:
     - `$ cp github_ssh.pub ~/Desktop`
-    - If you don't have the public key, run this: `$ ssh-keygen -f ~/.ssh/github_ssh -y > ~/.ssh/github_ssh.pub`
+    - If you don't have a public key, run this:
+    
+        `$ ssh-keygen -f ~/.ssh/github_ssh -y > ~/Desktop/github_ssh.pub`
+
 1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 1. Test your connection (in Linux terminal):
     - `$ ssh -T git@github.com`
@@ -77,7 +80,7 @@ In the Linux subsystem terminal:
 
 You can now `git push` to your github account.
 
-If you have [more than 1 SSH key](https://stackoverflow.com/q/7927750/9762732) in your `.ssh` folder, you need to edit your `~/.ssh/config` file with the following entry. Otherwise git won't know which key it should use to log into github:
+If you have [more than 1 SSH key](https://stackoverflow.com/q/7927750/9762732) in your `.ssh` folder, you need to edit your `~/.ssh/config` file and add the following entry to specify which key to use for a domain:
 ```
 Host github.com
   HostName github.com
@@ -151,7 +154,7 @@ Your commits will now be automatically signed.
 # Connect to Paperspace Jupyter server over SSH
 
 1. Make sure you've [enabled public IP](https://support.paperspace.com/hc/en-us/articles/236362888-Public-IP-Addresses)
-1. Follow the steps outlined [here](https://github.com/ericlingit/fastai-notes/blob/master/_setup/ubuntu.md#connect-to-paperspace-over-ssh) to connect to paperspace over ssh.
+1. Follow the steps outlined [here](https://github.com/ericlingit/fastai-notes/blob/master/_setup/ubuntu.md#connect-to-paperspace-over-ssh) to set up paperspace ssh auththentication.
 1. On Paperspace website console:
     - Start your VM
 1. On local machine:
