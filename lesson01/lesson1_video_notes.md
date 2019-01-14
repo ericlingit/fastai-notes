@@ -40,10 +40,32 @@ Screenshot:
  
  Notice how a higher weight `w` makes the curve more steep, and a lower `w` makes the curve flatter. Why is that? A high weight will amplify any input. While a low or negative weight has the reverse effect.
  
- A positive bias `b` shifts the curve left (positive), and a negative bias shifts it right. Why? Since `y = sigmoid(wx + b)`, a negative `b` reduces the sum of `wx + b`, and thus 'delays' the activation by requiring a larger input `x`.
+ A positive bias `b` shifts the curve left, and a negative bias shifts it right. Why? Since `y = sigmoid(wx + b)`, a negative `b` reduces the sum of `wx + b`, and thus 'delays' the activation by requiring a larger input `x`.
 
-With numerous linear/non-linear units, you can not only approximate a line (2D), you can also appriximate more complex (even 3D!) shapes:
+With numerous linear/non-linear units, you can not only approximate a line (2D), you can also appriximate more complex, multi-dimensional shapes:
+
 ![Imgur](https://i.imgur.com/dmrCAm2.png)
 
 ---
 
+## Finding the optimal learning rate
+Use `lr_finder`. it's part of `fastai` library:
+
+```python
+learn = ConvLearner.pretrained(arch, data, precompute=True)
+lrf=learn.lr_find()
+```
+
+It starts with a small learning rate, and gradually increases it. At first, the loss will improve slowly, then quickly, then get worst again:
+
+![Imgur](https://i.imgur.com/LOGGwJO.png)
+
+Don't take the learning rate at the point of lowest loss. Why? Because that's where loss will start to climb dramatically. Instead, pick the learning rate with a good reduction in loss *just before* the bottom of the graph. 10^-2 (0.01).
+
+## Picking an `epoch`
+Going thru all of the training data once = 1 epoch.
+
+At the end of each epoch, check the validation accuracy and loss.
+
+How many should I run?
+> "as many as you'd like ... if you run it for too long, the accuracy will start to get worse (overfitting) ... Run lots of epochs. Once you see it getting worse, you'll know how many epochs you can run." - Jeremy @ 1:19:49
