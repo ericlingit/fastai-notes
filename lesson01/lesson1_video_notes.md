@@ -63,9 +63,11 @@ It starts with a small learning rate, and gradually increases it. At first, the 
 Don't take the learning rate at the point of lowest loss. Why? Because that's where loss will start to climb dramatically. Instead, pick the learning rate with a good reduction in loss *just before* the bottom of the graph. 10^-2 (0.01).
 
 ## Picking an `epoch`
-Going thru all of the training data once = 1 epoch.
+1 epoch = run thru all of the training data once (in batches).
+
+1 batch = a small number of samples that are run thru the neural net together during training.
 
 At the end of each epoch, check the validation accuracy and loss.
 
-How many should I run?
+How many epochs should I run?
 > "as many as you'd like ... if you run it for too long, the accuracy will start to get worse (overfitting) ... Run lots of epochs. Once you see it getting worse, you'll know how many epochs you can run." - Jeremy @ 1:19:49
