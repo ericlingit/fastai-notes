@@ -1,4 +1,4 @@
-Lesson 01 video: [YouTube](https://www.youtube.com/watch?v=IPBSB1HLNLo)
+[Lesson 01 video](https://course.fast.ai/lessons/lesson1.html)
 
 ## Course structure
 The first-half of this course will run through each state-of-the-art models for different tasks. The second-half will be going into in-dept details of the models used and the theory behind them.
