@@ -105,6 +105,10 @@ A bowl-shaped, wide & deep minimum is preferred. When a different dataset is use
 
 [Image credit](https://medium.com/@hiromi_suenaga/deep-learning-2-part-1-lesson-2-eeae2edd2be4)
 
+What does "generailze better" mean?
+
+It means that given the same parameters, changes in input do not result in a large change in loss. 
+
 ![Imgur](https://i.imgur.com/VUVP2vK.png)
 
 [Image credit](https://towardsdatascience.com/fast-ai-season-1-episode-2-1-e9cc80d81a9d)
