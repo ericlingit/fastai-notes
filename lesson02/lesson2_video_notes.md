@@ -70,11 +70,18 @@ data = ImageClassifierData.from_paths(PATH, <strong>tfms=tfms</strong>)
 `transforms_side_on`: for photos taken from the side. ie, side view of an object. Applies horizontal flips, slight rotations, slight zooms, small translations, or varied brightness & contrast.
 
 ---
+## More on learning rate
+### Learning rate annealing
+Decrease learning rate as you train, so you don't overshoot minimum.
 
-Learning rate annealing = decrease learning rate as you train, so you don't overshoot minima.
+Step decay of learning rate:
+
+![Imgur](https://i.imgur.com/6qowQ9F.png)
+
+[Image credit](https://www.jeremyjordan.me/nn-learning-rate/)
 
 <dl>
-    <a href="https://www.dictionary.com/browse/anneal"><dt>Anneal, verb</dt></a>
+    <a href="https://www.dictionary.com/browse/anneal"><dt>Anneal (verb)</dt></a>
     <dd><ol>
         <li>to heat (glass, earthenware, metals, etc.) to remove or prevent internal stress.</li>
         <li>to free from internal stress by heating and gradually cooling.</li>
@@ -82,7 +89,38 @@ Learning rate annealing = decrease learning rate as you train, so you don't over
     </ol></dd>
 </dl>
 
-Cosine annealing = the rate of decrease follows one-half of a cosine curve. ie, stay on high lr when you're still far away (from the minima), then quickly decrease lr when you get close.
+### Cosine annealing
+The rate of decrease follows one-half of a cosine curve. ie, stay on high lr when you're still far away (from the minimum), then quickly decrease lr when you get close.
 
-![Imgur](https://i.imgur.com/VqgjvjJ.png)
+![Imgur](https://i.imgur.com/CHzkL3f.png)
 
+### Cyclic learning rate
+Not all minima are created equal. Some generalize better, while others, don't.
+
+What's a good minimum?
+
+A bowl-shaped, wide & deep minimum is preferred. When a different dataset is used, the [loss landscape](https://www.cs.umd.edu/~tomg/projects/landscapes/) might translate laterally. A deep & wide minimum will generalizes better, verses a deep but narrow minimum.
+
+![Imgur](https://i.imgur.com/NmKyXJa.png)
+
+[Image credit](https://medium.com/@hiromi_suenaga/deep-learning-2-part-1-lesson-2-eeae2edd2be4)
+
+![Imgur](https://i.imgur.com/VUVP2vK.png)
+
+[Image credit](https://towardsdatascience.com/fast-ai-season-1-episode-2-1-e9cc80d81a9d)
+
+We need to *jump* out of the local minimum to see if there are other, better minima out there.
+
+To jump, we can periodically bump up the learning rate to escape a local minimum. This is known as SGD with restarts.
+
+![Imgur](https://i.imgur.com/68NqPPn.png)
+
+The learning rate over time looks like this:
+
+![Imgur](https://i.imgur.com/4taVJUt.png)
+
+
+
+---
+
+[Visualizing the Loss Landscape of Neural Nets](https://i.imgur.com/EvGWtHw.png)
