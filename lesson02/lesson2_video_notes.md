@@ -94,16 +94,15 @@ The rate of decrease follows one-half of a cosine curve. ie, stay on high lr whe
 
 ![Imgur](https://i.imgur.com/CHzkL3f.png)
 
-### Cyclic learning rate
+### What's a good minimum?
 Not all minima are created equal. Some generalize better, while others, don't.
 
-What's a good minimum?
 
 A bowl-shaped, wide & deep minimum is preferred. When a different dataset is used, the [loss landscape](https://www.cs.umd.edu/~tomg/projects/landscapes/) might translate laterally. A deep & wide minimum will generalizes better, verses a deep but narrow minimum.
 
-![Imgur](https://i.imgur.com/NmKyXJa.png)
+![Imgur](https://i.imgur.com/8QF1din.png)
 
-[Image credit](https://medium.com/@hiromi_suenaga/deep-learning-2-part-1-lesson-2-eeae2edd2be4)
+[Image credit: "On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima"](https://openreview.net/pdf?id=H1oyRlYgg)
 
 What does "generailze better" mean?
 
@@ -119,11 +118,14 @@ To jump, we can periodically bump up the learning rate to escape a local minimum
 
 ![Imgur](https://i.imgur.com/68NqPPn.png)
 
+[Image credit](https://towardsdatascience.com/fast-ai-season-1-episode-2-1-e9cc80d81a9d)
+
+### Cyclic learning rate
 The learning rate over time looks like this:
 
 ![Imgur](https://i.imgur.com/4taVJUt.png)
 
-
+When setting a learning rate with `lr_find`, it's important not to pick too low of a learning rate. Our lr will define the upper bound of our learning rate schedule. If it is too low, we'll have a difficult time escaping a sharp minimum.
 
 ---
 
