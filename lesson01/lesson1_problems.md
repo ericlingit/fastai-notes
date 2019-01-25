@@ -120,7 +120,7 @@ socket.gaierror: [Errno -2] Name or service not known
 ---
 
 ## Discovered that there are 2 version of the course on github:
-1. One located at https://github.com/fastai/fastai/tree/master/courses
-1. Another one at https://github.com/fastai/courses
+1. One located at https://github.com/fastai/fastai/tree/master/courses <-- 2018 version. Runs on fastai==0.7.0 and pytorch
+1. Another one at https://github.com/fastai/courses <-- this is the 2017 version. It uses keras & theano.
 
 The first one appears more current, and is bundled with Paperspace's fastai template.
