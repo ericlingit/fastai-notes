@@ -1,4 +1,12 @@
-[Lesson 01 video](https://course.fast.ai/lessons/lesson1.html)
+# Notice
+
+This is the 2018 course (v2), based on fastai v0.7.0. Course 2019 (v3) based on fastai v1.0.42 [has been released](https://www.fast.ai/2019/01/24/course-v3/).
+
+---
+
+[Lesson 01 video](https://youtu.be/IPBSB1HLNLo)
+
+[Lesson 01 wiki](https://forums.fast.ai/t/wiki-lesson-1/9398)
 
 ## Course structure
 The first-half of this course will run through each state-of-the-art models for different tasks. The second-half will be going into in-dept details of the models used and the theory behind them.

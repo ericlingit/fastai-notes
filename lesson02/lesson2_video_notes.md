@@ -1,4 +1,14 @@
-[Lesson 02 video](https://course.fast.ai/lessons/lesson2.html)
+# Notice
+
+This is the 2018 course (v2), based on fastai v0.7.0. Course 2019 (v3) based on fastai v1.0.42 [has been released](https://www.fast.ai/2019/01/24/course-v3/).
+
+I'll be switching to, and starting anew with course v3. There won't be new notebooks regarding course v2.
+
+---
+
+[Lesson 02 video](https://youtu.be/JNxcznsrRb8)
+
+[Lesson 02 wiki](https://forums.fast.ai/t/wiki-lesson-2/9399)
 
 Lesson topics (copied from course page):
 > more about image classification, covering several core deep learning concepts that are necessary to get good performance:
