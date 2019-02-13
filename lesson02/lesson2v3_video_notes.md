@@ -1,9 +1,49 @@
-Things to look out for during training:
-- learning rate too high
-- learning rate too low
-- epochs too high
-- epochs too low
+## 16:29 How to create your own dataset (teddy bear identifier)
 
+Go ahead and build a model and train it. The incorrectly labeled images and images that don't belong will bubble up as most-confused and least confident.
+
+#### 31:31 Clean up dataset
+
+#### 35:18 Jupyter notebook widgets (apps)
+
+#### 37:36 The model can deal with random noise well.
+It's normal that the model improves only very slightly after data clean up. The problem is when you data is biased.
+
+#### 38:27 Putting model in production
+You're more likely to run the production model on a CPU instead of a GPU. A GPU is efficient when many users are sending many requests at a time for batch inference. Unless your website is visited by lots of people every second, a CPU is sufficient. It's less complicated and easier to setup.
+
+#### 41:16 Inference
+
+#### 43:39 Serve your model as a web app
+
+#### 43:52 Python `await`, `async` keyword
+Lets you wait for some long-running task to be done without taking up/holding up a process.
+
+## 46:51 Things that can go wrong
+- learning rate too high
+    - symptom: very high validation loss
+    - fix: decrease your learning rate
+- learning rate too low
+    - symptom:
+        - error_rate improves, but very slowly
+        - underfitting: training loss > valid loss
+    - fix: increase your learning rate
+- epochs too low
+    - symptom: 
+        - underfitting: training loss is much higher than valid loss
+    - fix: increase number of epochs. if still slow to improve, increase the learning rate
+- epochs too high
+    - symptom: overfitting: error_rate improves, but then deteoriates
+    - fix: reduce the number of epochs
+
+#### 50:45 It's hard to overfit
+Many people claim that train_loss < valid_loss is a sign of overfitting. This is not true. A correctly trained model will always have train_loss < valid_loss. It's not overfitting as long as the error_rate is improving.
+
+## 53:11 Understand what goes on under the hood
+
+
+
+####  Default learning rate
 `3e-3` (0.003) is a good default learning rate before you unfreeze. 
 
 A rule of thumb for learning rate range after unfreezing: for the upper bound of the slice, use a value 1/10 of the default learning rate. Use `lr_find()` to find the lower bound.
