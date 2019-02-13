@@ -41,10 +41,22 @@ Many people claim that train_loss < valid_loss is a sign of overfitting. This is
 
 ## 53:11 Understand what goes on under the hood
 
+In the previous teddy bear detector example, we have these **inputs**: the pixel values of each image. We then have these **outputs**: a 3-number value each represents the probability of either a black bear, a brown bear, or a teddy bear.
+
+In the digits-recognition example, the input is the pixel value of each number image. The output is a 10-value list of numbers. Each value represents the probability that the image is a particular number between 0-9.
+
+Use `np.argmax` to find the index of the highest value. It's what `learn.predict()` uses.
 
 
-####  Default learning rate
-`3e-3` (0.003) is a good default learning rate before you unfreeze. 
+
+####  Look at a simple linear model
+
+
+## 56:38 Questions 
+#### 56:46 How is `error_rate` calculated?
+
+####  59:22 Default learning rate
+`3e-3` (0.003) is a good default learning rate before you finetune.
 
 A rule of thumb for learning rate range after unfreezing: for the upper bound of the slice, use a value 1/10 of the default learning rate. Use `lr_find()` to find the lower bound.
 
