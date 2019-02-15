@@ -47,39 +47,81 @@ In the digits-recognition example, the input is the pixel value of each number i
 
 Use `np.argmax` to find the index of the highest value. It's what `learn.predict()` uses.
 
+#### 1:02:19 Look at a simple linear model
 
+`y = a*x + b`
 
-####  Look at a simple linear model
+Pair a1 with x. Replace `b` with `a2`, and pair it with a `1`. This makes matrix multiplication easier:
 
+`y = a1*x + a2*1`
 
-## 56:38 Questions 
-#### 56:46 How is `error_rate` calculated?
+We can further replace `1` with `x2` and set it to always equal to `1`:
 
-####  59:22 Default learning rate
-`3e-3` (0.003) is a good default learning rate before you finetune.
+```
+Given x2 = 1
+y = a1*x1 + a2*x2
+```
 
-A rule of thumb for learning rate range after unfreezing: for the upper bound of the slice, use a value 1/10 of the default learning rate. Use `lr_find()` to find the lower bound.
+`yi` means there are many values of `y`, and `xi` means there are many values of `x`. This is the same as indexing in a list.
 
-The process generally looks like this:
-1. run a few epochs at `3e-3`:
-    ```python
-    learn.fit_one_cycle(4, 3e-3)
-    ```
-1. unfreeze:
-    ```python
-    learn.unfreeze()
-    ```
-1. run a few more epochs with a slice lr
-    ```python
-    learn.fit_one_cycle(4, slice(xxx, 3e-4))
-    ```
-    `xxx` is where the strongest slope is on `lr_find()`.
+So if `x` is a list of numbers from 1-10, `x1` is the same as `x[0]`.
 
----
+`a1` and `a2` (`b`) remain the same. They're the coefficient (or parameters).
+
+When you have multi-value variables that have to multiply by one another, it's easier to turn them into equal-length lists and use matrix/vector multiplication. This saves you from having to write loops to iterate through every number in a list.
+
+`y_vec = X * a_vec`
+
+`X` is a matrix of `x1` and `x2` (where `x2` is `1`s).
+
+`a_vec` is a vector of 2 values: `a1` (weight), and `a2` (aka `b` or bias).
 
 [Animated demonstration of matrix mutiplication](http://matrixmultiplication.xyz/)
 
-The `@` operator is matrix multiplication in python 3.5+.
+#### 1:14:13 Why vectorize?
+So when we code, we won't have to write loops, and it's faster.
+
+#### 1:16:14 [Lesson2-sgd.ipynb](https://github.com/fastai/course-v3/blob/master/nbs/dl1/lesson2-sgd.ipynb): fit `y_vec = X * a_vec` to some data using SGD
+
+Generate random data `x1 and x2`:
+
+```python
+n = 100 # the number of records/data points
+x = torch.ones(n,2) # 2 columns of ones: x1 and x2
+x[:,0].uniform_(-1.,1) # set random numbers for x1
+```
+Remember, x2 is always 1.
+
+Create some coefficients `a1` and `a2`:
+```python
+a = tensor(3.,2)
+```
+
+Our 'architecture':
+```python
+y = x@a + torch.rand(n)
+```
+
+`x@a` is the matrix product between `x` and `a` (this notation was introduced in python 3.5).
+
+Adding `torch.rand(n)` gives `y` some randomness.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+![Imgur](https://i.imgur.com/C6HdFL8.png)
+
 
 A tensor is just an array with symmetric shape.
 
@@ -107,6 +149,50 @@ Here, `torch.rand(n)` adds noise to our function, so we don't end up with a stra
 
 Our goal here is to find the values of `a` (pretend that we didn't set them ourselves). 
 
-Why is this useful? A simple linear function `y = mx + b` takes an input `x`, and outputs a value `y`. A neural network is basically the same, but with many more inputs, outputs. If we can map the relationship between the inputs (eg pixel values of an image) and the outputs (eg a decimal value for each dog/cat breed), we'll have a useful and predictive function (what breed is the cat shown in img002.jpg?).
+Why is this useful? A simple linear function `y = ax + b` takes an input `x`, and outputs a value `y`. A neural network is basically the same, but with many more inputs, outputs. If we can map the relationship between the inputs (eg pixel values of an image) and the outputs (eg a decimal value for each dog/cat breed), we'll have a useful and predictive function (what breed is the cat shown in img002.jpg?).
 
 The relationship we're trying to find is the weights (`m` and `b` in the linear function example).
+
+
+---
+
+## Questions 
+#### 56:46 How is `error_rate` calculated?
+
+####  59:22 Default learning rate / Why use 3s for `learning_rate`?
+`3e-3` (0.003) is a good default learning rate before you finetune.
+
+A rule of thumb for learning rate range after unfreezing: for the upper bound of the slice, use a value 1/10 of the default learning rate. Use `lr_find()` to find the lower bound.
+
+The process generally looks like this:
+1. run a few epochs at `3e-3`:
+    ```python
+    learn.fit_one_cycle(4, 3e-3)
+    ```
+1. unfreeze:
+    ```python
+    learn.unfreeze()
+    ```
+1. run a few more epochs with a slice lr
+    ```python
+    learn.fit_one_cycle(4, slice(xxx, 3e-4))
+    ```
+    `xxx` is where the strongest down slope is on `lr_find()`.
+
+#### 1:08:35 How many images is enough? How do you know you don't have enough data?
+
+You found a good leanring rate, but after training long enough (until you start to overfit), you're still not satisfied with the accuracy.
+
+The solution is get more data.
+
+There's no shortcut to know how much data you'll need before hand. Start with a small amount first, then see how it goes before gathering more.
+
+#### 1:10:00 What to do if you have unbalanced classes?
+You can take the uncommon class and make duplicates (over-sampling). But Jeremy says things work just fine without having to do anything special.
+
+#### 1:11:04 What to do if after finetuning, it's still underfitting?
+Just try it: run another cycle or start over with more epochs. Jeremy normally runs a few more cycles.
+
+#### 1:12:04 What's in resnet? When we saved the teddy-bear model, the file was about 85MB. What's it?
+resnet is just a function (formula/architecture). When you save/export a model, what you're saving is the parameters/weights. When you use a pretrained model, you're reusing the weights someone has exported.
+
