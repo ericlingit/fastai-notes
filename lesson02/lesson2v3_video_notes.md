@@ -92,6 +92,8 @@ x[:,0].uniform_(-1.,1) # set random numbers for x1
 ```
 Remember, x2 is always 1.
 
+`x[:,0]` indexes all rows in column 0. `.uniform_(-1,1)` *updates* all of the values in the indexed range to between -1 and 1. In pytorch, functions that end with an underscore will update the variable that called the function (instead of simply returning a value w/o modifying the variable).
+
 Create some coefficients `a1` and `a2`:
 ```python
 a = tensor(3.,2)
@@ -106,13 +108,14 @@ y = x@a + torch.rand(n)
 
 Adding `torch.rand(n)` gives `y` some randomness.
 
+#### 1:18:15 tensor
+A tensor is just an array with a regular shape: rectangular or cubed (meaning, every column has the same length, and every row has the same length).
 
+Arrays have dimensions, and tensors have ranks. An array with 3 dimensions is a rank 3 tensor.
 
+In our simple linear equation example, `x` is a n-by-2 tensor: a rank-2 tensor because it has 2 dimensions. `n` is 100, so we have a 100 rows by 2 columns tensor of ones. 
 
-
-
-
-
+**Note**: in code, the shape of a 2D tensor is expressed  in `rows x columns`.
 
 
 
@@ -123,19 +126,13 @@ Adding `torch.rand(n)` gives `y` some randomness.
 ![Imgur](https://i.imgur.com/C6HdFL8.png)
 
 
-A tensor is just an array with symmetric shape.
 
-Arrays have dimension, and tensors have ranks.
 
-An array with 3 dimensions is a rank 3 tensor.
 
-```python
-x = torch.ones(n,2)
-x[:,0].uniform_(-1,1)
-```
-`x` is a n-by-2 tensor. It's a rank-2 tensor because we passed 2 args. `n` is 100, so we have a 100 rows by 2 columns tensor of ones. 
 
-`x[:,0]` indexes all rows in column 0. `.uniform_(-1,1)` *updates* all of the values in the indexed range to between -1 and 1. In pytorch, functions that end with an underscore will update the variable that called the function (instead of simply returning a value w/o modifying the variable).
+
+
+
 
 The above points cover 95% of what you need to know with pytorch:
 1. how to create an array (tensor)
