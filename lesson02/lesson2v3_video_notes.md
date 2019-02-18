@@ -168,6 +168,15 @@ Just eyeballing the above chart tells us that we need to tilt the line up, and s
 
 How could we achieve the same without having to eyeball the chart? Use derivatives from calculus!
 
+Calculating the derivative helps us know whether to increase or decrease the parameters.
+
+#### 1:39:12 Gradient descent
+
+The pytorch function that calculates the gradient: `tensor.backward()`
+
+#### 1:41:12 Learning rate
+
+
 ---
 
 ## Questions 
