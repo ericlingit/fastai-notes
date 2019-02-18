@@ -128,9 +128,45 @@ Our goal here is to find the values of `a` (pretend that we didn't set them ours
 
 Why is this useful? A simple linear function `y = ax + b` takes an input `x`, and outputs a value `y`. A neural network is basically the same, but with many more inputs and outputs. If we can map the relationship between the inputs (eg pixel values of an image) and the outputs (eg a decimal value for each dog/cat breed), we'll have a useful and predictive function (eg, what breed is the cat shown in img002.jpg?).
 
-The relationship is the weight `a` and bias `b` (combined into `a_vec` in the linear function example) that has the least amount of error (ie, fits the dots well).
+The relationship is the weight `a` and bias `b` (combined into `a_vec` in the linear function example) that has the least amount of error (ie, the line the function draws fits the dots well).
 
+The 'error' is the average distance between the line and the dots. The lower the distances, the lower the error (or loss).
 
+#### Bad fit, high error:
+
+![Imgur](https://i.imgur.com/d5dh7eg.png)
+
+#### Good fit, low error:
+
+![Imgur](https://i.imgur.com/6Oytlfh.png)
+
+#### 1:30:31 Error is measured using mean squared error (mse)
+
+It tells you how good your line is. The lower the loss, the better.
+
+#### 1:34:18 How to come up with the line
+
+You have to start by making random, wild guesses for `a1` and `a2` (in `a_vec`).
+
+Let's say, we use -1 and 1 for `a1` and `a2`.
+
+#### 1:35:00 Make sure you use `floats` and not `int`
+
+Simply adding a dot after a number will do. Like this: `1.`
+
+#### 1:35:50 Make our predictions using randomized `a_vec`, and use MSE to measure the error.
+
+It'll look like this:
+
+![Imgur](https://i.imgur.com/d5dh7eg.png)
+
+#### 1:36:57 What next? How do we improve on that?
+
+We can try increasing or decreasing `a1` and `a2` to see how they affect the line. `a1` is the slope, so increasing it will tilt the line up. `a2` is the y-intercept, so increasing it will translate (shift) the line up.
+
+Just eyeballing the above chart tells us that we need to tilt the line up, and shift the y-intercept (at x=0) upward.
+
+How could we achieve the same without having to eyeball the chart? Use derivatives from calculus!
 
 ---
 
