@@ -92,7 +92,7 @@ x[:,0].uniform_(-1.,1) # set random numbers for x1
 ```
 Remember, x2 is always 1.
 
-`x[:,0]` indexes all rows in column 0. `.uniform_(-1,1)` *updates* all of the values in the indexed range to between -1 and 1. In pytorch, functions that end with an underscore will update the variable that called the function (instead of simply returning a value w/o modifying the variable).
+`x[:,0]` indexes all rows in column 0. `.uniform_(-1,1)` *updates* all of the values in the indexed range to between -1 and 1. In `pytorch`, functions that end with an underscore will update the variable that called the function (instead of simply returning a value w/o modifying the variable).
 
 Create some coefficients `a1` and `a2`:
 ```python
@@ -117,38 +117,19 @@ In our simple linear equation example, `x` is a n-by-2 tensor: a rank-2 tensor b
 
 **Note**: in code, the shape of a 2D tensor is expressed  in `rows x columns`.
 
-
-
----
-
-
-
-![Imgur](https://i.imgur.com/C6HdFL8.png)
-
-
-
-
-
-
-
-
-
-
 The above points cover 95% of what you need to know with pytorch:
 1. how to create an array (tensor)
 1. how to change the values in that array (indexing and value updates)
 1. how to multiply arrays (use `@`)
 
-```python
-y = x@a + torch.rand(n)
-```
-Here, `torch.rand(n)` adds noise to our function, so we don't end up with a straight line of dots.
+![Imgur](https://i.imgur.com/C6HdFL8.png)
 
-Our goal here is to find the values of `a` (pretend that we didn't set them ourselves). 
+Our goal here is to find the values of `a` (pretend that we didn't set them ourselves).
 
-Why is this useful? A simple linear function `y = ax + b` takes an input `x`, and outputs a value `y`. A neural network is basically the same, but with many more inputs, outputs. If we can map the relationship between the inputs (eg pixel values of an image) and the outputs (eg a decimal value for each dog/cat breed), we'll have a useful and predictive function (what breed is the cat shown in img002.jpg?).
+Why is this useful? A simple linear function `y = ax + b` takes an input `x`, and outputs a value `y`. A neural network is basically the same, but with many more inputs and outputs. If we can map the relationship between the inputs (eg pixel values of an image) and the outputs (eg a decimal value for each dog/cat breed), we'll have a useful and predictive function (eg, what breed is the cat shown in img002.jpg?).
 
-The relationship we're trying to find is the weights (`m` and `b` in the linear function example).
+The relationship is the weight `a` and bias `b` (combined into `a_vec` in the linear function example) that has the least amount of error (ie, fits the dots well).
+
 
 
 ---
