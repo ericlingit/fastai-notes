@@ -1,5 +1,7 @@
 ## 16:29 How to create your own dataset (teddy bear identifier)
 
+[lesson2-download.ipynb](https://github.com/fastai/course-v3/blob/master/nbs/dl1/lesson2-download.ipynb)
+
 Go ahead and build a model and train it. The incorrectly labeled images and images that don't belong will bubble up as most-confused and least confident.
 
 #### 31:31 Clean up dataset
@@ -188,6 +190,16 @@ Replan the animation with a too-large learning rate, and a too-small learning ra
 
 In every iteration (a single update of parameters), our example measures the error between the line and *all* points of data. If the dataset (the number of points) is many millions, measuring the error on all points will become very slow. Instead, we can measure error against a small portion of the data, then update the parameter. This small portion of data is a **mini-batch**.
 
+#### 1:49:48 Vocabulary review
+
+#### 1:52:25 No such thing as "not a math person"
+
+Rachel's talk: [There is no such thing as "not a math person"](https://www.youtube.com/watch?v=q6DGVGJ1WP4)
+
+#### 1:54:54 Underfitting, overfitting
+
+Generalization: how well your model works on data it hasn't seen.
+
 ---
 
 ## Questions 
@@ -229,4 +241,3 @@ Just try it: run another cycle or start over with more epochs. Jeremy normally r
 
 #### 1:12:04 What's in resnet? When we saved the teddy-bear model, the file was about 85MB. What's it?
 resnet is just a function (formula/architecture). When you save/export a model, what you're saving is the parameters/weights. When you use a pretrained model, you're reusing the weights someone has exported.
-
