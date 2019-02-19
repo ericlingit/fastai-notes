@@ -196,6 +196,12 @@ In every iteration (a single update of parameters), our example measures the err
 
 Rachel's talk: [There is no such thing as "not a math person"](https://www.youtube.com/watch?v=q6DGVGJ1WP4)
 
+> The reason skill in mathematics isn't genetically determined is because math hasn't been around long enough to be written into our genes. - [BigThink.com](https://bigthink.com/mind-brain/bad-at-math-myth)
+
+Skills and intelligence are something that can be developed. Failures are learning experiences that help you suceed at the next attempt.
+
+[Basic ability in the subject isn't the product of good genes, but hard work.](https://www.theatlantic.com/education/archive/2013/10/the-myth-of-im-bad-at-math/280914/)
+
 #### 1:54:54 Underfitting, overfitting
 
 Generalization: how well your model works on data it hasn't seen.
