@@ -176,7 +176,13 @@ The pytorch function that calculates the gradient: `tensor.backward()`
 
 #### 1:41:12 Learning rate
 
+More detail on gradient descent and learning rate is covered in the Introduction to Machine Learning course.
 
+#### 1:46:24 Animate gradient descent
+
+Rather than using a loop, use matplotlib's animation function.
+
+Replan the animation with a too-large learning rate, and a too-small learning rate. See what effects that'll have.
 ---
 
 ## Questions 
