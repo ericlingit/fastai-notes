@@ -183,6 +183,11 @@ More detail on gradient descent and learning rate is covered in the Introduction
 Rather than using a loop, use matplotlib's animation function.
 
 Replan the animation with a too-large learning rate, and a too-small learning rate. See what effects that'll have.
+
+#### 1:48:06 Mini batches
+
+In every iteration (a single update of parameters), our example measures the error between the line and *all* points of data. If the dataset (the number of points) is many millions, measuring the error on all points will become very slow. Instead, we can measure error against a small portion of the data, then update the parameter. This small portion of data is a **mini-batch**.
+
 ---
 
 ## Questions 
