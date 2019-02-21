@@ -64,7 +64,18 @@ new_func = partial(old_func, arg1=0.1)
 
 In the above example, we can see that `partial` *preloads* the function `old_func` with `arg1=0.1` and returns to `new_func`. When `new_func` is called, its argument will be `arg1=0.1`.
 
+In our multi-label classification example, we need to preload `accuracy_thresh` with `thresh=0.2`; and preload `fbeta` with `thresh=0.2`:
 
+```python
+acc_02 = partial(accuracy_thresh, thresh=0.2)
+f_score = partial(fbeta, thresh=0.2)
+```
+
+39:28 How is this useful? It can remove the need to write a new function.
+
+Creating a new function that is identical to another function, and only differ in the value of arguments is called a **partial function**.
+
+41:03 The next steps are identical to what we've learned from lessons 1 & 2.
 
 ---
 
