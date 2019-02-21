@@ -105,3 +105,10 @@ use an unet to do segmentation
 
 ---
 
+## Questions
+
+42:01 How to record mistakes made by the model? Get your users to tell you. You need to create a mechnism in place to store user feedback on the incorrect predictions. In production, the model doesn't know which predictions it made are wrong. Once you have a collection of mis-classified examples, finetune your model with them. When finetuning with mis-classified examples, try to use a larger learning rate or run more epochs.
+
+44:00 Does the data block API have to be called in a specific order? Yes, as outlined in the [official doc](https://docs.fast.ai/data_block.html).
+
+47:39 Resources for loading video data. OpenCV.
