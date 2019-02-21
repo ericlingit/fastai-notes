@@ -1,7 +1,7 @@
 
 ## lesson3-planet.ipynb
 
-Multi-label image classification is similar to what we did in lessons 1 and 2. Instead of having 1 label per image, we have many.
+14:49 Multi-label image classification is similar to what we did in lessons 1 and 2. Instead of having 1 label per image, we have many.
 
 The workflow is largely the same:
 1. load data
@@ -13,13 +13,15 @@ What's different here, is how we load data.
 
 ## [Data block API](https://docs.fast.ai/data_block.html)
 
-We previously used [`ImageDataBunch`](https://docs.fast.ai/vision.data.html#ImageDataBunch). It has many convenient factory methods for loading image data. For datasets that can't be loaded with factory methods, use [`ItemList`](https://docs.fast.ai/data_block.html#ItemList).
+16:05 We previously used [`ImageDataBunch`](https://docs.fast.ai/vision.data.html#ImageDataBunch). It has many convenient factory methods for loading image data. For datasets that can't be loaded with factory methods, use [`ItemList`](https://docs.fast.ai/data_block.html#ItemList).
 
 [`ImageItemList`](https://docs.fast.ai/vision.data.html#ImageItemList) class (inherits `ItemList`) provides a more fine-graind way to define your image data.
 
 In fact, `ImageDataBunch` [calls](https://github.com/fastai/fastai/blob/c5e9bace1202ae1c2f50623b921ad52b1da8c1ed/fastai/vision/data.py#L114) `ImageItemList` under the hood.
 
-The general workflow for creating a `DataBunch` object with `ItemList` is as follows:
+18:10 `DataBunch` class itself is implements pytorch's `Dataset` abstract class, and `DataLoader` class. The `DataLoader` class loads a batch of data and places them into the GPU for training.
+
+24:25 The general workflow for creating a `DataBunch` object with `ItemList` is as follows:
 1. [Provide inputs](https://docs.fast.ai/data_block.html#Step-1:-Provide-inputs)
 1. [Split the data into a training and validation sets](https://docs.fast.ai/data_block.html#Step-2:-Split-the-data-between-the-training-and-the-validation-set)
 1. [Label the inputs](https://docs.fast.ai/data_block.html#Step-3:-Label-the-inputs)
@@ -27,18 +29,42 @@ The general workflow for creating a `DataBunch` object with `ItemList` is as fol
 1. [Optional: add a test set](https://docs.fast.ai/data_block.html#Add-a-test-set)
 1. [Wrap in dataloaders and create a DataBunch](https://docs.fast.ai/data_block.html#Step-4:-convert-to-a-DataBunch)
 
+29:57 Here the data block API is split into 2 cells because we'll be tweaking our DataBunch object later.
 
-#### [Transformations](https://docs.fast.ai/vision.transform.html) / augmentation
-
+30:18 Note on [transformations](https://docs.fast.ai/vision.transform.html):
 - set `flip_vert` to `True`. It's normal for satellites to see things upside down.
 - set `max_warp` to `0`. Warp changes the perspective of the camera. Satellite images usually look straight down.
 
+32:32 The types of transforms to apply depends on the data you have.
+
+33:00 The rest of the steps for creating a classifier is largely the same as before. The differences are the architecture used, and the metrics.
 
 ## Defining [metrics](https://docs.fast.ai/metrics.html)
 
-`metrics` shows how your model is doing. It doesn't affect training. You can have one, or a list of metrics: `metrics=[...]`
+33:49 `metrics` shows how your model is doing. It doesn't affect training. You can have one, or a list of metrics: `metrics=[...]`. The `metrics` argument takes a function name (a `Callable`) or a list of function names.
 
-[`f_score`](https://docs.fast.ai/metrics.html#fbeta) is used by kaggle. It takes false-positives & false-negatives into consideration.
+34:37 `f_score` is used by kaggle. It takes false-positives & false-negatives into consideration.
+
+35:27 [`fbeta `](https://docs.fast.ai/metrics.html#fbeta) uses F2 by default, and has a threshold of `0.2`.
+
+36:01 What does `thres=0.2` mean? In previous lessons, we tried to classify pet breeds by selecting the *one* category with the highest probability. Now, for multi-label classification, we want to select *all categories* with probabilities greater than `0.2`.
+
+37:42 `data.c` is the number of outputs a model can create. In planets example, we have 17 classes. Each class has a probability. That list of probabilities is what we're trying to predict in this lesson.
+
+## Partial
+
+38:56 In `create_cnn`, the `metrics` argument needs to be a Callable (or a list of Callables). But how do we specify the arguments to the metrics function? To **preload** a function's arguments with a value, use python's built-in [`partial()`](https://docs.python.org/3.7/library/functools.html#functools.partial) function.
+
+```python
+def old_func(arg1=99):
+    return arg1**2
+
+new_func = partial(old_func, arg1=0.1)
+```
+
+In the above example, we can see that `partial` *preloads* the function `old_func` with `arg1=0.1` and returns to `new_func`. When `new_func` is called, its argument will be `arg1=0.1`.
+
+
 
 ---
 
