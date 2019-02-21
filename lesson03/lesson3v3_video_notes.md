@@ -13,11 +13,20 @@ What's different here, is how we load data.
 
 ## [Data block API](https://docs.fast.ai/data_block.html)
 
-We previously used [`ImageDataBunch`](https://docs.fast.ai/vision.data.html#ImageDataBunch). It has many convenient factory methods for loading your data. For datasets that can't be loaded with factory methods, use [`ItemList`](https://docs.fast.ai/data_block.html#ItemList).
+We previously used [`ImageDataBunch`](https://docs.fast.ai/vision.data.html#ImageDataBunch). It has many convenient factory methods for loading image data. For datasets that can't be loaded with factory methods, use [`ItemList`](https://docs.fast.ai/data_block.html#ItemList).
 
 [`ImageItemList`](https://docs.fast.ai/vision.data.html#ImageItemList) class (inherits `ItemList`) provides a more fine-graind way to define your image data.
 
 In fact, `ImageDataBunch` [calls](https://github.com/fastai/fastai/blob/c5e9bace1202ae1c2f50623b921ad52b1da8c1ed/fastai/vision/data.py#L114) `ImageItemList` under the hood.
+
+The general workflow for creating a `DataBunch` object with `ItemList` is as follows:
+1. [Provide inputs](https://docs.fast.ai/data_block.html#Step-1:-Provide-inputs)
+1. [Split the data into a training and validation sets](https://docs.fast.ai/data_block.html#Step-2:-Split-the-data-between-the-training-and-the-validation-set)
+1. [Label the inputs](https://docs.fast.ai/data_block.html#Step-3:-Label-the-inputs)
+1. [Optional: apply transformations](https://docs.fast.ai/data_block.html#Add-transforms)
+1. [Optional: add a test set](https://docs.fast.ai/data_block.html#Add-a-test-set)
+1. [Wrap in dataloaders and create a DataBunch](https://docs.fast.ai/data_block.html#Step-4:-convert-to-a-DataBunch)
+
 
 #### [Transformations](https://docs.fast.ai/vision.transform.html) / augmentation
 
