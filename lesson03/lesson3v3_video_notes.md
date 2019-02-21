@@ -79,19 +79,33 @@ Creating a new function that is identical to another function, and only differ i
 
 ---
 
-After training and unfreezing, if you run `lr_find()`, the loss plot can look like this:
+## Finetuning
+
+48:38 After you unfreeze to finetune, you'll sometimes be confronted by a `lr_find` plot that looks like this:
 
 ![Imgur](https://i.imgur.com/nlMC4wv.png)
 
-It's hard to find a spot where the loss definitely declines. Instead, take the value at the elbow (just before where it shoots up), and go back by 10x for the left part of the slice. The the right part, take the original learning rate and divide by 5 or 10.
+It's hard to find a spot where the loss definitely declines. Instead, take the value at the elbow (just before where it shoots up), and go back by 10x for the lower part of the slice. The the higher part, take the original learning rate (before finetuning) and divide by 5 or 10.
 
 ---
 
-## Beyond finetuning
+## Beyond finetuning: Jeremy's superpower
 
 > yo dawg, i heard u like finetuning. so i finetuned your finetuned model!
 
-Start training your model with a smaller image size: train, unfreeze, and finetune. Then *freeze* that model. Next, train it again with a larger image size. Then unfreeze it and finetune it again.
+51:01 Remember when we created the dataset, we set the size to `128` pixels (the original image size is 256x256):
+
+```python
+.transforms(tfms, size=128)
+```
+
+It's faster to experiment with smaller images. But there's another reaseon: the model we have is good at recognizing images that are 128x128.
+
+We can utilize transfer learning and finetune our model that was trained on lower resolution images, and train it on higher resulotion images. It's almost like we're training on a whole new dataset, so there's no concern for overfitting.
+
+In essence, start training your model with a smaller image size: train, unfreeze, and finetune. Then *freeze* that model, and train it again with a larger image size. Then unfreeze it and finetune it again.
+
+52:40 Create a new DataBunch with higher resolution and replace the dataset in `learn.data`. *Then* freeze the model.
 
 When starting small, don't go smaller than 64x64.
 
