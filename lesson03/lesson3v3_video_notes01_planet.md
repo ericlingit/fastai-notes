@@ -111,11 +111,7 @@ When starting small, don't go smaller than 64x64.
 
 ---
 
-Image segmentation is like a magnified version of classification: you're trying to classify every single pixel in an image.
-
----
-
-use an unet to do segmentation
+End of planet notebook.
 
 ---
 
