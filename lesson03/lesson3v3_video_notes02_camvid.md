@@ -53,3 +53,7 @@ No. Picking a good lr from the graph depends on what stage you're at and the sha
 
 Experiment & play around with it to get a good sense.
 
+1:10:03 Is it possible to use unsupervised learning to automatically create image masks?
+
+Yes, but it won't be as accurate as human-labeled mask.
+

@@ -122,3 +122,7 @@ End of planet notebook.
 44:00 Does the data block API have to be called in a specific order? Yes, as outlined in the [official doc](https://docs.fast.ai/data_block.html).
 
 47:39 Resources for loading video data. OpenCV.
+
+1:10:51 When finetuning from lower image res to higher res, should we take small increments? e.g., 64x64 -> 128x128 -> 256x256 etc.
+
+Yes! It works great, but don't go below 64x64.
