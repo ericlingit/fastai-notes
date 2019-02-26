@@ -23,3 +23,12 @@ to this:
 use an unet to do segmentation
 
 ---
+
+## Questions
+
+1:00:28 Can `lr_find()` just return the optimal learning rate rather than eyeballing a graph?
+
+No. Picking a good lr from the graph depends on what stage you're at and the shape of the loss curve. 
+
+Experiment & play around with it to get a good sense.
+
