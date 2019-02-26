@@ -57,3 +57,11 @@ Experiment & play around with it to get a good sense.
 
 Yes, but it won't be as accurate as human-labeled mask.
 
+1:12:35 What does accuracy mean for pixel-level segmentation? Is it just correctly_predicted / all_pixels?
+
+Yes. We can just pass the `accuracy` function as metric, but here we'll use another function because some pixels are labeled `void`. We'll exclude void pixels from accuracy calculation (as specified in the original camvid research paper).
+
+1:15:04 My training loss is still higher than validation loss despite training for many epochs or with higher lr, help!
+
+If you're still underfitting, you could decrease regularization. We'll talk about this in part 2. Topics include: weight decay, dropout, and data augmentation.
+
