@@ -65,6 +65,20 @@ to this:
 
 1:27:57 Call `learn.show_results` to see how your model's predictions compare to the ground truth.
 
+## fp16
+
+1:31:18 You can use half-precision float-point calculations to further reduce GPU memory usage. It'll run twice as fast.
+
+Call `to_fp16` when you create the learner object:
+
+```python
+learn = Learner.create_unet( ... ).to_fp16()
+```
+
+Make sure you have the latest cuda drivers and a recent (sold after 2017) GPU before using half-precision.
+
+1:32:45 Bonus benefit of using half-precision: improved accuracy. When you make things less precise in deep learning, the model generalizes better.
+
 ---
 
 ## Questions
