@@ -51,19 +51,27 @@ to this:
 
 1:19:28 Fit one cycle: hikes the learning rate up before dropping it. Why?
 
-1:21:44 The increase in learning rate helps escape local minima and find a proper global minima. The decrease helps settle down into a good global minima. This is called **learning rate annealing**.
+1:21:44 The increase in learning rate helps escape local minima and find a proper global minima. The decrease helps settle down into a good global minima. This is called **learning rate annealing**:
 
-1:23:01 Benefit of increasing learning rate during training: better generalization (stuck in local minima). An increase in learning rate helps the function explore the loss landscape and settle into a good, flat global minima.
+![Imgur](https://i.imgur.com/Fjc7Ldd.png)
+
+1:23:01 Benefit of increasing learning rate during training: better generalization (stuck in local minima). An increase in learning rate helps the function explore the loss landscape and settle into a good, flat global minima:
+
+![Imgur](https://i.imgur.com/RMtYC7X.png)
 
 1:25:00 So if you call `plot_losses`, and you see the loss go up slightly then down, you've found a good maximum learning rate. When you call `fit_one_cycle`, you're actually passing the maximum learning rate. **If** the loss curve only trends downwards, you could end up being stuck in a local minima. Try increasing the learning rate.
 
-1:25:50 After each training cycle, it's a good idea to examine the loss plot. Very the learning rate to see how the plot will respond. This kind of practice will give you  a good sense of what works and what doesn't.
+![Imgur](https://i.imgur.com/Q6UKOZE.png)
+
+1:25:50 After each training cycle, it's a good idea to examine the loss plot. Vary the learning rate to see how the plot will respond. This kind of practice will give you  a good sense of what works and what doesn't.
 
 1:26:58 Step up the image size. Reduce the batch size. If you double the image size, reduce the batch size by half.
 
 1:27:15 If you ran out of GPU memory, create a new learner and load the weights from previous stage.
 
-1:27:57 Call `learn.show_results` to see how your model's predictions compare to the ground truth.
+1:27:57 Call `learn.show_results` to see how your model's predictions compare to the ground truth:
+
+![Imgur](https://i.imgur.com/MCooNMu.png)
 
 ## fp16
 
