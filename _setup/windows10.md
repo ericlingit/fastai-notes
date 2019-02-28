@@ -117,6 +117,9 @@ Host github.com
 
         `$ gpg --list-secret-keys --keyid-format LONG`
 1. Export the public key: `$ gpg -a --export DB3DA594230C0E46 > ~/Desktop/github_gpg_public.asc`
+
+1. If you already a secret gpg key, import with: `$ gpg --import my_private_key`
+
 1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-gpg-key-to-your-github-account/).
 1. Back in the linux terminal, cd to your working directory: `$ cd ~/Desktop/fastai-notes`
 1. Enter the following commands:
