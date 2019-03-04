@@ -30,12 +30,12 @@ Data directory structure:
 ├── io_sample.cpp
 └── readme.txt
 
-Each numbered directory from `01` to `24` is a different person. Each directory has the fames of a video.
-
 24 directories, 26 files
 ```
 
-1:34:40 Preprocessing as speicified in the readme (not related to deep learning).
+Each numbered directory from `01` to `24` is a different person. Each directory has the fames of a video.
+
+1:34:40 Required preprocessing as speicified in the readme (not related to deep learning).
 
 1:35:27 We're trying to figure out the coordinates of the center of the face: an x,y pair.
 
