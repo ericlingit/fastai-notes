@@ -2,6 +2,18 @@
 
 1:41:08
 
+We need to create 2 data bunches: one for the language model, and one for the classifier.
+
+There are some preprocessing done to the input text when creating a databunch:
+1. tokenization: turns the article into a list of words (tokens).
+1. numiericalization: turn the list tokens (the vocabulary) into a list of numbers, ranked by frequency of appearance.
+
+Create a language model, train it and save it.
+
+Finetune the language model in the classifier.
+
+We'll go deeper in the next lesson.
+
 ## Wrapping up
 
 2:01:20 We started out with single-label classification. The exact same steps we used for that can be utitilized to do other tasks: multi-label classification (planet), image segmentation (camvid), image regression (head pose), and NLP classification (imdb), and a lot more!
