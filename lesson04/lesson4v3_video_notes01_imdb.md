@@ -2,7 +2,7 @@
 
 2:05
 
-3:42 text classificatio problem
+3:42 text classification problem
 
 3:51
 
@@ -30,11 +30,35 @@ We take a pre-trained language model that is already pretty good (Wikitext103) a
 
 15:13
 
+Data columns:
+- label: positive or negative
+- text: the text of movie reviews
+- is_valid: validation set (True or False)
 
+We can use the `TextClasDataBunch` to create a DataBunch. It'll automatically tokenize and numericalize for us. Words like `it's` are broken into `it` and `'s`.
+
+The list of unique words (ranked by frequency) is your vocabulary.
+
+17:16 In our weight matrix, every word has a vector that represents it. To avoid that weight matrix from getting too big, we limit the number of words to 60,000. We also omit words that appear fewer than twice.
+
+Those omitted words are replaced by a `xxunk` (unknown) token. There are other special tokens like `xxcap` that denotes words in all-caps.
+
+18:30 DataBunch with data block API:
+- We're dealing with text, so we use `TextList`, and because our data is in a csv file, we call `load_csv`.
+- `.split_from_df(cols=2)`: our validation set is specified in col 2
+- `.label_from_df(cols=0)`: our target label is specified in col 0
+- `.databunch()`: create databunch.
+
+19:21 The full IMDB dataset has 50,000 reviews: train/valid is split 50/50; and another 50,000 unlabeled reviews.
+- `train/pos`: positive reviews
+- `train/neg`: negative reviews
+- `train/unsup`: unlabeled samples
+
+19:44 
 
 ## Questions
 
-12:46 Does the language model transfer learning apprach work for informal English or slang?
+12:46 Does the language model transfer learning approach work for informal English or slang?
 
 Yes, as long as you finetune it on the target corpus.
 
