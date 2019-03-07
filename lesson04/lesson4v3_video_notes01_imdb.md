@@ -54,7 +54,31 @@ Those omitted words are replaced by a `xxunk` (unknown) token. There are other s
 - `train/neg`: negative reviews
 - `train/unsup`: unlabeled samples
 
-19:44 
+### Language Model
+
+19:44
+
+Lucky for us, someone has already trained the Wikitext language model (takes 2-3 days!) and made it available.
+
+Even if you have text from specific fields like medicine, you should still start from Wikitext. Use transfer learning whenever possible.
+
+#### Training data for language model
+
+20:33 The full IMDB dataset is a list of text files. Each review is in its own file, and they're all stored in the same folder; so we use `TextFileList.from_folder(path)`.
+
+20:54 Why randomly split by 10%? When training a language model, you don't care about the labels. So you can combine the training and test set and have a smaller validation set. Use as much text as you can get when training a language model.
+
+22:03 So how do we label? Remember that a language model has its own internal label: the next word **is** the label. So we use `.label_for_lm()`.
+
+22:33 Create a language model learner. This creates a RNN. The basic structure largely the same: a lot of matrix multiplication with negative values zeroed out (relu).
+
+For our learner, we need the training data, the pretrained model to use (Wikitext103; WT103), and dropout. Dropout reduces overfitting.
+
+When we `fit_one_cycle`, we're fientuning the last layers of Wikitext103.
+
+As usual, we'd then unfreeze and train some more with a lower learning rate. Note that this takes 2+ hours even on a high-end GPU.
+
+25:00 An accuracy of 0.3 means we correctly guess the next word 1/3 of the time.
 
 ## Questions
 
