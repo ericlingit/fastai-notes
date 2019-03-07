@@ -74,7 +74,7 @@ Even if you have text from specific fields like medicine, you should still start
 
 For our learner, we need the training data, the pretrained model to use (Wikitext103; WT103), and dropout. Dropout reduces overfitting.
 
-When we `fit_one_cycle`, we're fientuning the last layers of Wikitext103.
+When we `fit_one_cycle`, we're finetuning the last layers of Wikitext103.
 
 As usual, we'd then unfreeze and train some more with a lower learning rate. Note that this takes 2+ hours even on a high-end GPU.
 
@@ -98,7 +98,19 @@ Last time, we split randomly. This time, we need to specify the validation set i
 
 Use a lower batch size for the databunch to avoid running out of GPU memory.
 
-29:07
+29:07 Create a text classifier learner using the above data. Use `.load_encoder()` to load our pre-trained language model's encoder, and freeze.
+
+Use `lr_find` to find an optimal learning rate and fit one cycle.
+
+For finetuning, we'll do something a bit different: instead of unfreezing all layers, we'll `freeze_to(-2)` to unfreeze the last 2 layers (ie, freeze all layers except the last 2). Then train for 1 more cycle.
+
+For text classification, don't unfreeze the whole model; unfreeze layer-by-layer.
+
+Again, unfreeze 1 more layer: `freeze_to(-3)`, and fit another cycle.
+
+THEN you unfreeze the whole model, and fit another cycle or two.
+
+The `moms=(0.8, 0.7)` arg is momentum. For training RNNs, it helps to decrease momentum.
 
 ## Questions
 
@@ -108,3 +120,16 @@ Yes, as long as you finetune it on the target corpus.
 
 People thought that this wouldn't work well because Wikitext is not representative of how people write on the Internet.
 
+33:37 When finetuning the classifier model, Jeremy trained the model with various learning rates *divided by* `(2.6**4)`:
+
+```python
+learn.fit_one_cycle(2, slice(1e-3/(2.6**4),1e-3), moms=(0.8,0.7))
+```
+
+Where does `(2.6**4)` come from?
+
+You'll learn about the 4th power at the end of this video.
+
+2.6: Jeremy used a machine learning technique (random forest) to figure out the optimal hyperparameters for NLP. He found that the best learning rate is 2.6.
+
+36:04 Auto ML is the use of machine learning to help train your model. Build models to better understand how the hyperparameters work to find rules of thumb is helpful.
