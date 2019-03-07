@@ -78,7 +78,27 @@ When we `fit_one_cycle`, we're fientuning the last layers of Wikitext103.
 
 As usual, we'd then unfreeze and train some more with a lower learning rate. Note that this takes 2+ hours even on a high-end GPU.
 
-25:00 An accuracy of 0.3 means we correctly guess the next word 1/3 of the time.
+25:00 An accuracy of 0.3 means we correctly guess the next word 1/3 of the time. This level of accuracy is actually quite good, and is a good sign that our language model is doing well.
+
+We can now predict the next words of a sentence. But this is not trained to be good a text generation. We're only checking that it can follow correct grammatical rules.
+
+At this point, we have a language model that understands movie reviews.
+
+26:33 A language model as 2 primary parts: one part understands the sentences, and the other predicts what word comes next. We need only the first part: the encoder. We'll save it and use it for our classifier.
+
+### Classifier
+
+27:17
+
+#### Training data for classifier model
+
+We'll load the same data with one difference: we'll load the vocabulary set from the language model training data. So that for both models, their vocabularies match.
+
+Last time, we split randomly. This time, we need to specify the validation set is in the `test` folder because we're training a classifier. We also need to specify the label classes.
+
+Use a lower batch size for the databunch to avoid running out of GPU memory.
+
+29:07
 
 ## Questions
 
