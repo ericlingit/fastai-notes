@@ -30,9 +30,13 @@ Tell it which column we want to use as the dependent variable. In this example, 
 
 48:55 `get_tabular_learner`
 
-`layers=[200, 100]` this is information about the neural network architecture.
+52:12  `layers=[200, 100]`
 
+This is information about the neural network architecture, similar to how we chose `resnet34` for image classification.
 
+Reminder: `metrics` are just extra info that gets printed out during training. They have no effect on the model.
+
+53:08 Collaborative filtering
 
 ## Questions
 
