@@ -39,3 +39,11 @@ Tell it which column we want to use as the dependent variable. In this example, 
 40:45 What are the 10% of cases (for tabular data) that Jeremy won't default to using neural nets?
 
 Just try both neural nets and random forests to experiment.
+
+49:14 How to combine NLP tokenized data with tabular data? For example, combine IMDB data with meta data related to each film (who the actors are, what year it's made, etc).
+
+We're not quite up to that yet. You can merge different sets of input to various layers of a neural network. We might get into that in part 2, but might not have enough time to cover it.
+
+50:36 Do you think `scikit-learn` and `XGBoost` will become outdated with everyone switching to neural nets?
+
+No idea.
