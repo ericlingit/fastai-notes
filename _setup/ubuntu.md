@@ -28,6 +28,13 @@ On local machine:
     - Log into the remote machine and edit this file: ~/.ssh/authorized_keys
     - Paste the public key located at ~/.ssh/paperspace_ssh.pub
     - Save & close
+    
+1. Enable public key authentication on the remote machine
+    - sudo nano /etc/ssh/sshd_config
+    - uncomment `PubkeyAuthentication yes`
+    - uncomment `AuthorizedKeysFile .ssh/authorized_keys`
+    - save
+    - sudo systemctl restart ssh
 
 1. Test your setup by logging in with:
     - $ ssh paperspace
