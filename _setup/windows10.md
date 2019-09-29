@@ -140,12 +140,12 @@ Host github.com
 1. Back in the linux terminal, cd to your working directory: `$ cd ~/Desktop/fastai-notes`
 1. Enter the following commands:
     ```
-    $ git config user.name ericlingit
-    $ git config user.email ericlingit@users.noreply.github.com
-    $ git config user.signingkey 6475F2FF9432A8621B79F499DB3DA594230C0E46
-    $ git config commit.gpgsign true
+    $ git config --global user.name ericlingit
+    $ git config --global user.email ericlingit@users.noreply.github.com
+    $ git config --global user.signingkey 6475F2FF9432A8621B79F499DB3DA594230C0E46
+    $ git config --global commit.gpgsign true
     ```
-Your commits will now be automatically signed.
+Your commits will now be automatically signed. You can omit the `--global` flag if you only want to apply the config to the current working directory.
 
 ### Check that your commits are properly signed
 1. Modify your work, make a commit, and `git push` to Github.
