@@ -119,6 +119,22 @@ Host github.com
 1. Export the public key: `$ gpg -a --export DB3DA594230C0E46 > ~/Desktop/github_gpg_public.asc`
 
 1. If you already have a secret gpg key, import with: `$ gpg --import my_private_key`
+    - If you get a permission error like this:
+        ```
+        gpg: failed to create temporary file `/home/paperspace/.gnupg/.#lk0x0000000.psxxxxxxx.0000': Permission denied
+        gpg: keyblock resource `/home/paperspace/.gnupg/secring.gpg': general error
+        gpg: failed to create temporary file `/home/paperspace/.gnupg/.#lk0x0000000.psxxxxxxx.0000': Permission denied
+        gpg: keyblock resource `/home/paperspace/.gnupg/pubring.gpg': general error
+        gpg: no default secret keyring: eof
+        gpg: error reading `github_sign_key': general error
+        gpg: import from `github_sign_key' failed: general error
+        gpg: Total number processed: 0
+        gpg:       secret keys read: 1
+        ```
+    - You need to reset the permission of your ~/.gnupg folder with
+        ```
+        sudo chown -R paperspace.paperspace ~/.gnupg
+        ```
 
 1. [Add the public key to your Github account](https://help.github.com/articles/adding-a-new-gpg-key-to-your-github-account/).
 1. Back in the linux terminal, cd to your working directory: `$ cd ~/Desktop/fastai-notes`
